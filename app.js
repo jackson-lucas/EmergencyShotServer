@@ -4,7 +4,6 @@ var favicon = require('serve-favicon'); // NOT USING
 var logger = require('morgan');
 var cookieParser = require('cookie-parser'); // NOT USING
 var bodyParser = require('body-parser');
-var sequelize = require('./database/database_connection.js');
 
 // API ROUTES
 var index = require('./routes/index');
@@ -24,19 +23,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// API Routes
 app.use('/', index);
-
 app.get('/getCallByIntervalTime', getCallByIntervalTime);
-
 app.post('/createPerson', createPerson);
-/*
-app.post('/personjson', jsonParser, function(req, res) {
-  res.send('Thank you for the JSON data!');
-  console.log(req.body.firstname);
-  console.log(req.body.lastname);
-});*/
-
 app.post('/createCall', createCall);
+
 
 // catch 404 and forward to error handler
 app.use(function(request, response, next) {

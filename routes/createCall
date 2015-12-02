@@ -4,15 +4,15 @@ module.exports = function createCall (req, res, next) {
 
   console.log("CREATE CALL");
 
-  var email = req.params.email;
-  var sinistro = req.params.sinistro;
-  var data = req.params.data;
-  var horario = req.params.horario;
-  var latitude = req.params.lat;
-  var longitude = req.params.lon;
-  var midia = req.params.midia; // BLOB
+  var googleId = req.body.googleId;
+  var sinistro = req.body.sinistro;
+  var data = req.body.data;
+  var horario = req.body.horario;
+  var latitude = req.body.localizacao.lat;
+  var longitude = req.body.localizacao.lon;
+  var midia = req.body.midia; // BLOB
 
-  var query = `INSERT INTO denuncia(EMAIL, DATA, HORARIO, LAT, LON) VALUES ('${email}', '${data}', '${horario}', ${latitude}, ${longitude});`;
+  var query = `INSERT INTO denuncia(EMAIL, DATA, HORARIO, LAT, LON) VALUES ('${googleId}', '${data}', '${horario}', ${latitude}, ${longitude});`;
 
   console.log("-------------------------");
   console.log(query);

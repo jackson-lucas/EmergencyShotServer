@@ -3,11 +3,12 @@ var sequelize = require('../database/database_connection.js');
 function createPerson (request, response, next) {
   console.log("CREATE PERSON");
 
-  var nome = request.params.nome;
-  var email = request.params.email;
-  var telefone = request.params.telefone;
+  var nome = request.body.nome;
+  var googleId = request.body.googleId;
+  var telefone = request.body.telefone;
 
-  var query = `INSERT INTO pessoa(NOME, EMAIL, TELEFONE) VALUES ('${nome}', '${email}', '${telefone}');`;
+  // Need to change email to googleId
+  var query = `INSERT INTO pessoa(NOME, EMAIL, TELEFONE) VALUES ('${nome}', '${googleId}', '${telefone}');`;
   console.log(query);
 
   sequelize.query(query, { type: sequelize.QueryTypes.INSERT})
@@ -18,7 +19,7 @@ function createPerson (request, response, next) {
       console.log(error);
     });
 
-  response.render('index', { title: 'Create Person' });
+  response.send('200');
 };
 
 module.exports = createPerson;
