@@ -1,0 +1,30 @@
+var sequelize = require('../database/database_connection.js');
+
+module.exports = function createCall (req, res, next) {
+
+  console.log("CREATE CALL");
+
+  var email = req.params.email;
+  var sinistro = req.params.sinistro;
+  var data = req.params.data;
+  var horario = req.params.horario;
+  var latitude = req.params.lat;
+  var longitude = req.params.lon;
+  var midia = req.params.midia; // BLOB
+
+  var query = `INSERT INTO denuncia(EMAIL, DATA, HORARIO, LAT, LON) VALUES ('${email}', '${data}', '${horario}', ${latitude}, ${longitude});`;
+
+  console.log("-------------------------");
+  console.log(query);
+  console.log("-------------------------");
+
+  sequelize.query(query, { type: sequelize.QueryTypes.INSERT})
+    .then(function(result) {
+      console.log(result);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  res.render('index', { title: 'Create Denuncia' });
+};

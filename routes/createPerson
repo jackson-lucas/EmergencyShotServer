@@ -1,0 +1,24 @@
+var sequelize = require('../database/database_connection.js');
+
+function createPerson (request, response, next) {
+  console.log("CREATE PERSON");
+
+  var nome = request.params.nome;
+  var email = request.params.email;
+  var telefone = request.params.telefone;
+
+  var query = `INSERT INTO pessoa(NOME, EMAIL, TELEFONE) VALUES ('${nome}', '${email}', '${telefone}');`;
+  console.log(query);
+
+  sequelize.query(query, { type: sequelize.QueryTypes.INSERT})
+    .then(function(result) {
+      console.log(result);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  response.render('index', { title: 'Create Person' });
+};
+
+module.exports = createPerson;

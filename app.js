@@ -1,12 +1,14 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+var favicon = require('serve-favicon'); // NOT USING
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
+var cookieParser = require('cookie-parser'); // NOT USING
 var bodyParser = require('body-parser');
 var sequelize = require('./database/database_connection.js');
 
-var routes = require('./routes/index');
+// API ROUTES
+var index = require('./routes/index');
+var createPerson = require('./routes/createPerson');
 
 var app = express();
 
@@ -22,28 +24,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+app.use('/', index);
 
-app.use('/create_pessoa/:nome/:email/:telefone', function createPerson (req, res, next) {
-  console.log("CREATE PERSON");
+app.get('/getCallByIntervalTime', getCallByIntervalTime);
 
-  var nome = req.params.nome;
-  var email = req.params.email;
-  var telefone = req.params.telefone;
-
-  var query = `INSERT INTO pessoa(NOME, EMAIL, TELEFONE) VALUES ('${nome}', '${email}', '${telefone}');`;
-  console.log(query);
-
-  sequelize.query(query, { type: sequelize.QueryTypes.INSERT})
-    .then(function(result) {
-      console.log(result);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-  res.render('index', { title: 'Create Person' });
-});
+app.post('/createPerson', createPerson);
 /*
 app.post('/personjson', jsonParser, function(req, res) {
   res.send('Thank you for the JSON data!');
@@ -51,48 +36,13 @@ app.post('/personjson', jsonParser, function(req, res) {
   console.log(req.body.lastname);
 });*/
 
-app.use('/create_call/:email/:sinistro/:data/:horario/:lat/:lon/:midia', function createCall (req, res, next) {
-
-  console.log("CREATE CALL");
-
-  var email = req.params.email;
-  var sinistro = req.params.sinistro;
-  var data = req.params.data;
-  var horario = req.params.horario;
-  var latitude = req.params.lat;
-  var longitude = req.params.lon;
-  var midia = req.params.midia; // BLOB
-
-  var query = `INSERT INTO denuncia(EMAIL, DATA, HORARIO, LAT, LON) VALUES ('${email}', '${data}', '${horario}', ${latitude}, ${longitude});`;
-
-  console.log("-------------------------");
-  console.log(query);
-  console.log("-------------------------");
-
-  sequelize.query(query, { type: sequelize.QueryTypes.INSERT})
-    .then(function(result) {
-      console.log(result);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-  res.render('index', { title: 'Create Denuncia' });
-});
-
-app.use('/get_call/:time/:intervalTime', function getCallByTime (req, res, next) {
-  var time = req.params.time;
-  var intervalTime = req.params.intervalTime;
-  console.log(time, intervalTime);
-  res.render('index', { title: 'Create Call By Time' });
-
-});
+app.post('/createCall', createCall);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function(request, response, next) {
+  var error = new Error('Not Found');
+  error.status = 404;
+  next(error);
 });
 
 // error handlers
@@ -100,21 +50,21 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
+  app.use(function(error, request, response, next) {
+    response.status(error.status || 500);
+    response.render('error', {
+      message: error.message,
+      error: error
     });
   });
 }
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
+app.use(function(error, request, response, next) {
+  response.status(error.status || 500);
+  response.render('error', {
+    message: error.message,
     error: {}
   });
 });
