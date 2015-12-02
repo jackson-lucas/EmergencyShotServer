@@ -12,6 +12,8 @@ module.exports = function createCall (req, res, next) {
   var longitude = req.body.localizacao.lon;
   var midia = req.body.midia; // BLOB
 
+  // TODO: Check if every variable is valid
+
   var query = `INSERT INTO denuncia(EMAIL, DATA, HORARIO, LAT, LON) VALUES ('${googleId}', '${data}', '${horario}', ${latitude}, ${longitude});`;
 
   console.log("-------------------------");
@@ -25,6 +27,8 @@ module.exports = function createCall (req, res, next) {
     .catch(function (error) {
       console.log(error);
     });
+
+  // TODO: Give proper response in sucess and failure
 
   res.render('index', { title: 'Create Denuncia' });
 };
