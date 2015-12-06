@@ -4,6 +4,7 @@ var favicon = require('serve-favicon'); // NOT USING
 var logger = require('morgan');
 var cookieParser = require('cookie-parser'); // NOT USING
 var bodyParser = require('body-parser');
+var sqlinjection = require('sql-injection');
 
 // API ROUTES
 var index = require('./routes/index');
@@ -11,6 +12,9 @@ var createPerson = require('./routes/createPerson');
 var createCall = require('./routes/createCall');
 
 var app = express();
+
+// Protection Modules
+app.use(sqlinjection);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
