@@ -1,20 +1,21 @@
 var sequelize = require('../database/database_connection.js');
 
-module.exports = function createCall (req, res, next) {
+module.exports = function createCall (request, response, next) {
 
   console.log("CREATE CALL");
 
-  var googleId = req.body.googleId;
-  var sinistro = req.body.sinistro;
-  var data = req.body.data;
-  var horario = req.body.horario;
-  var latitude = req.body.localizacao.lat;
-  var longitude = req.body.localizacao.lon;
-  var midia = req.body.midia; // BLOB
+  var googleId = request.body.googleId;
+  var sinistroId = request.body.sinistroId;
+  var data = request.body.data;
+  var horario = request.body.horario;
+  var latitude = request.body.lat;
+  var longitude = request.body.lon;
+  var midia = request.body.midia; // BLOB
 
-  // TODO: Check if every variable is valid
+  // TODO: Check if every variable is valid(avoid SQL injection)
 
-  var query = `INSERT INTO denuncia(EMAIL, DATA, HORARIO, LAT, LON) VALUES ('${googleId}', '${data}', '${horario}', ${latitude}, ${longitude});`;
+  var query = `INSERT INTO chamada(GOOGLE_ID, DATA, HORARIO, LAT, LON, ID_SINISTRO) VALUES
+    ('${googleId}', '${data}', '${horario}', ${latitude}, ${longitude}, ${sinistroId});`;
 
   console.log("-------------------------");
   console.log(query);
@@ -23,12 +24,12 @@ module.exports = function createCall (req, res, next) {
   sequelize.query(query, { type: sequelize.QueryTypes.INSERT})
     .then(function(result) {
       console.log(result);
+      response.send("200")
     })
     .catch(function (error) {
       console.log(error);
+      response.send("400")
     });
 
-  // TODO: Give proper response in sucess and failure
 
-  res.render('index', { title: 'Create Denuncia' });
 };

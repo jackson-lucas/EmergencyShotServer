@@ -8,18 +8,19 @@ function createPerson (request, response, next) {
   var telefone = request.body.telefone;
 
   // Need to change email to googleId
-  var query = `INSERT INTO pessoa(NOME, EMAIL, TELEFONE) VALUES ('${nome}', '${googleId}', '${telefone}');`;
+  var query = `INSERT INTO pessoa(NOME, GOOGLE_ID, TELEFONE) VALUES ('${nome}', '${googleId}', '${telefone}');`;
   console.log(query);
 
   sequelize.query(query, { type: sequelize.QueryTypes.INSERT})
     .then(function(result) {
       console.log(result);
+      response.send("200")
     })
     .catch(function (error) {
       console.log(error);
+      response.send("400")
     });
 
-  response.send('200');
 };
 
 module.exports = createPerson;

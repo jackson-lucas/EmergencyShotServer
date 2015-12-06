@@ -1,0 +1,15 @@
+POST /createCall HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+Cache-Control: no-cache
+Postman-Token: 2873f135-2de6-df30-1340-02e76e8e55d0
+
+{
+  "googleId": "123456789123456789123",
+  "data": "20151127",
+  "horario": "140000",
+  "lat": "-3.119028",
+  "lon": "-60.021731",
+  "sinistroId": "1",
+  "midia": "imagem"
+}
