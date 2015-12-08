@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 //app.get('/getCallByIntervalTime', getCallByIntervalTime);
 app.post('/createPerson', createPerson);
-app.post('/createCall.txt', createCall);
+app.post('/createCall', createCall);
 
 
 // catch 404 and forward to error handler
