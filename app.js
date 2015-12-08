@@ -14,7 +14,7 @@ var createCall = require('./routes/createCall');
 var app = express();
 
 // Protection Modules
-app.use(sqlinjection);
+//app.use(sqlinjection);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
