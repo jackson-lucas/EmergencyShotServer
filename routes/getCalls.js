@@ -6,14 +6,17 @@ module.exports = function createCall (request, response, next) {
 
   var date = request.body.data;
   var startTime = request.body.tempoInicio;
+  var startDate = request.body.dataInicio;
   var endTime = request.body.tempoFim;
+  var endDate = request.body.dataFim;
 
   // TODO Create SQL Injection Prevetion Module
   // TEST request API with POSTMAN
 
-  // select * from chamada where data='20151127' and horario <= '153000' and horario > '140000' ;
-  var query = `SELECT * FROM chamada WHERE data='${date}' AND
-    horario <= '${endTime}' AND horario > '${startTime}');`;
+  // select * from chamada where data>='20151127' and data<='20151127' and horario <= '153000' and horario > '140000';
+  var query = `SELECT * FROM chamada WHERE data>='${startDate}'
+    AND data<='${endDate}' AND horario <= '${endTime}'
+    AND horario >= '${startTime}');`;
 
   console.log("-------------------------");
   console.log(query);

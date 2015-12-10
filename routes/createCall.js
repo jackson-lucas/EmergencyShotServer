@@ -12,9 +12,6 @@ module.exports = function createCall (request, response, next) {
   var longitude = request.body.lon;
   var midia = request.body.midia; // BLOB
 
-  // TODO:0 [TEST] if SQL Injection Module it works
-  // TEST create this test
-
   var query = `INSERT INTO chamada(GOOGLE_ID, DATA, HORARIO, LAT, LON, ID_SINISTRO) VALUES
     ('${googleId}', '${data}', '${horario}', ${latitude}, ${longitude}, ${sinistroId});`;
 

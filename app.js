@@ -10,6 +10,7 @@ var sqlinjection = require('sql-injection');
 var index = require('./routes/index');
 var createPerson = require('./routes/createPerson');
 var createCall = require('./routes/createCall');
+var getCalls = require('./routes/getCalls');
 
 var app = express();
 
@@ -37,7 +38,7 @@ app.post('/createPerson', createPerson);
 app.post('/createCall', createCall);
 
 // GET
-app.get('/getCallByIntervalTime', getCallByIntervalTime);
+app.get('/getCalls', getCalls);
 
 
 // catch 404 and forward to error handler
