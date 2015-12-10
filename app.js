@@ -31,9 +31,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // API Routes
 app.use('/', index);
-//app.get('/getCallByIntervalTime', getCallByIntervalTime);
+
+// POST
 app.post('/createPerson', createPerson);
 app.post('/createCall', createCall);
+
+// GET
+app.get('/getCallByIntervalTime', getCallByIntervalTime);
 
 
 // catch 404 and forward to error handler

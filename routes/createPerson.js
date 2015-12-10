@@ -7,7 +7,6 @@ function createPerson (request, response, next) {
   var googleId = request.body.googleId;
   var telefone = request.body.telefone;
 
-  // Need to change email to googleId
   var query = `INSERT INTO pessoa(NOME, GOOGLE_ID, TELEFONE) VALUES ('${nome}', '${googleId}', '${telefone}');`;
   console.log(query);
 
