@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var sqlinjection = require('sql-injection');
 
 // API ROUTES
-var index = require('./routes/index');
 var createPerson = require('./routes/createPerson');
 var createCall = require('./routes/createCall');
 var getCalls = require('./routes/getCalls');
@@ -16,6 +15,8 @@ var app = express();
 
 // Protection Modules
 //app.use(sqlinjection);
+
+// TODO check how to make https connections with node
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,14 +32,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // API Routes
-app.use('/', index);
-
 // POST
 app.post('/createPerson', createPerson);
 app.post('/createCall', createCall);
 
 // GET
-app.get('/getCalls', getCalls);
+app.get('/getCalls/:startDate/:startTime/:endDate/:endTime', getCalls);
 
 
 // catch 404 and forward to error handler
