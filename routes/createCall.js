@@ -24,7 +24,7 @@ module.exports = function createCall (request, response, next) {
       console.log(result);
       response.send("200")
     })
-    .catch(function (error) {ˇ
+    .catch(function (error) {
       console.log(error);
       response.send("400")
     });
