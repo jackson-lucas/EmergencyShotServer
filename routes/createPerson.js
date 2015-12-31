@@ -13,7 +13,7 @@ function createPerson (request, response, next) {
   sequelize.query(query, { type: sequelize.QueryTypes.INSERT})
     .then(function(result) {
       console.log(result);
-      response.send("200")
+      response.send("200");
     })
     .catch(function (error) {
       console.log(error);

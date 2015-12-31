@@ -1,0 +1,142 @@
+Reunião:
+- getSinistros
+    - Desnecessario
+    - Melhor Android App já ter tabela dentro OK
+        - Atualizações(Se ouverem/raramente) na tabela seria feito atualizando o app.
+- Chamada e Tipo de Sinistro
+    - Apenas 1 Sinistro por chamada
+        - Dessa forma, se um sinistro é composto de dois tipos. Então é um novo sinistro.
+            - Intenção é diminuir o número de tabelas no BD e por consequente facilitar pesquisas no BD.
+        - Tratamento Android. Pode ser com multiplas perguntas para obter o sinistro correto. (MVP?)
+        - Tipo de sinistro pode ser mudado para Sinistro. Assim a tabela Sinistro pode ter característica
+            que a diferencia entre outros Sinistros.
+    - Uma linguagem para o usuário comum e outra para o atendente? (MVP?)
+
+Taxonomia Atendentes
+Incendio
+    Veiculo
+    Imovel
+    vegetação urbana
+    florestal
+Corte/Poda de Arvore
+    rede eletrica
+    edificio
+    veiculo
+Acidente de Transito
+    c/ vitima
+    s/ vitima
+    presa em ferragem
+Vazamento de Gás
+    com fogo
+    sem fogo
+Outros
+
+MVP Server
+    // Melhor ja ter a tabela no android. evita a necessidade de uma conexao antes do usuario poder fazer a chamada
+    getSinistros() ***
+
+        {
+
+        }
+
+    GET
+    readEmergencyCallByTimeInterval(autheticationId?, time, interval)
+
+    POST
+    createEmergencyCall(email, data, localizacao, midia)
+    {
+        googleID: "JKLDFIO$#402392",
+        data: "20151128", // 2015y 11m 28d
+        horario: "143000", // 14h 30m 00s
+        localizacao: {
+            lat: -3.3232,
+            lon: -60.4343
+        },
+        sinistro: 1, ***
+        midia: byte[]
+    }
+
+    POST
+    createUser(nome, email, tefelone)
+    getEmergencyCallsByTime(horario, intervalo) intervalo em minutos
+    // 16:30, 30 = 16:00 - 16:30
+    {
+        nome: "Jackson Lima",
+        googleId: "KDJRIO32FKLD",
+        telefone: "92991259125"
+    }
+
+// How to mine data? to knowledge multiple calls at same location and time
+    leaflet plugin: https://github.com/Leaflet/Leaflet.markercluster (by location)
+    interval time can be provided by server or attendant call.
+
+
+Database
+    EmergencyCall
+     id : serial
+     email
+     data
+     tempo: hh:mm:ss
+     localizacao
+     midia
+
+    User
+     nome
+     email
+     telefone
+
+
+DROP TABLE IF EXISTS pessoa CASCADE;
+DROP TABLE IF EXISTS denuncia CASCADE;
+DROP TABLE IF EXISTS gestores CASCADE;
+
+#####################
+
+CREATE TABLE PESSOA(
+NOME CHAR(100),
+GOOGLE_ID CHAR(21) PRIMARY KEY,
+TELEFONE CHAR(11)
+);
+
+CREATE TABLE SINISTRO(
+ID INT PRIMARY KEY,
+SINISTRO CHAR(60) UNIQUE
+);
+
+CREATE TABLE CHAMADA(
+ID SERIAL,
+GOOGLE_ID CHAR(21),
+DATA DATE,
+HORARIO TIME,
+LAT FLOAT(30),
+LON FLOAT(30),
+MIDIA BYTEA,
+ID_SINISTRO INT,
+PRIMARY KEY (ID,GOOGLE_ID,DATA),
+FOREIGN KEY (GOOGLE_ID) REFERENCES PESSOA(GOOGLE_ID),
+FOREIGN KEY (ID_SINISTRO) REFERENCES SINISTRO(ID)
+);
+
+CREATE TABLE GESTORES(
+  ID SERIAL PRIMARY KEY,
+  NOME CHAR(100),
+  EMAIL CHAR(50),
+  GERENTE BOOLEAN DEFAULT FALSE,
+  SUP_GERENTE_ID INT DEFAULT NULL,
+  FOREIGN KEY(SUP_GERENTE_ID) REFERENCES GESTORES(ID)
+ );
+
+ ###############
+
+INSERT INTO pessoa(NOME, GOOGLE_ID, TELEFONE) VALUES ('Jackson Lima', '123456789012345678901', '92991251365');
+
+INSERT INTO sinistro(ID, SINISTRO) VALUES (1, 'Incêndio em veículo');
+
+INSERT INTO chamada(GOOGLE_ID, DATA, HORARIO, LAT, LON, ID_SINISTRO) VALUES ('123456789012345678901', '20151127', '140000', '-3.119028', '-60.021731', 1);
+
+select * from pessoa;
+select * from sinistro;
+select * from chamada;
+
+localhost:3000/create_call/jlsl@icomp.ufam.edu.br/incendio/20151128/120000/-3.119028/-60.021731/BLOB
+http://localhost:3000/create_pessoa/jackson lima/jlsl@icomp.ufam.edu.br/991252534

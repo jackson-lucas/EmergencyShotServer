@@ -14,12 +14,23 @@ module.exports = function createCall (request, response, next) {
     API format (date: yyyyddmm; time:hhmmss) */
   // DOING:0 TEST request API with POSTMAN
 
-  /* select id, google_id, to_char(chamada.data, 'YYYYDDMM') as data,
-to_char(chamada.horario, 'HH24MISS') as horario, lat, lon, midia, id_sinistro
-from chamada where chamada.data>='20151127' and chamada.data<='20151127' and
-chamada.horario <= '153000' and chamada.horario > '140000';*/
-  var query = `SELECT id, google_id, to_char(chamada.data, 'YYYYDDMM') as data,
-to_char(chamada.horario, 'HH24MISS') as horario, lat, lon, midia, id_sinistro
+/*
+Date database format
+show datestyle;                                                      DateStyle
+-----------
+ ISO, MDY
+(1 row)
+
+test_node=# select current_date;
+date
+------------
+2015-12-31
+(1 row)
+*/
+  /* select id, google_id, data, horario, lat, lon, midia, id_sinistro
+from chamada where data>='11-27-2015' and data<='11-27-2015' and
+horario <= '15:30:00' and horario > '14:00:00';*/
+  var query = `SELECT id, google_id, data, horario, lat, lon, midia, id_sinistro
 FROM chamada WHERE data>='${startDate}'
     AND data<='${endDate}' AND horario <= '${endTime}'
     AND horario >= '${startTime}';`;
@@ -33,6 +44,7 @@ FROM chamada WHERE data>='${startDate}'
       response.send(result)
     })
     .catch(function (error) {
+      console.log('ERROR --------------------------');
       console.log(error);
       response.send("400")
     });
