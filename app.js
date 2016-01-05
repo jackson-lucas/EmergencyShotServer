@@ -5,6 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser'); // NOT USING
 var bodyParser = require('body-parser');
 var sqlinjection = require('sql-injection');
+var multer  = require('multer');
+
+var upload = multer({ dest: 'uploads/' });
 
 // API ROUTES
 var createPerson = require('./routes/createPerson');
@@ -34,15 +37,15 @@ app.use(function(req, res, next) {
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
 // API Routes
 // POST
-app.post('/createPerson', createPerson);
-app.post('/createCall', createCall);
+//app.post('/createPerson', createPerson);
+app.post('/createCall', upload.single('encoded_string'), createCall);
 
 // GET
 app.get('/getCalls/:startDate/:startTime/:endDate/:endTime', getCalls);

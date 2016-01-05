@@ -30,7 +30,7 @@ date
   /* select id, google_id, data, horario, lat, lon, midia, id_sinistro
 from chamada where data>='11-27-2015' and data<='11-27-2015' and
 horario <= '15:30:00' and horario > '14:00:00';*/
-  var query = `SELECT id, data, horario, lat, lon, midia, id_sinistro
+  var query = `SELECT id, to_char(chamada.data, 'MM-DD-YYYY') as data, horario, lat, lon, midia, id_sinistro
 FROM chamada WHERE data>='${startDate}'
     AND data<='${endDate}' AND horario <= '${endTime}'
     AND horario >= '${startTime}';`;
@@ -46,6 +46,6 @@ FROM chamada WHERE data>='${startDate}'
     .catch(function (error) {
       console.log('ERROR --------------------------');
       console.log(error);
-      response.send("400")
+      response.send(error)
     });
 };
