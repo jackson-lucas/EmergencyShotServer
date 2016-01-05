@@ -9,10 +9,10 @@ module.exports = function createCall (request, response, next) {
   var endTime = request.params.endTime;
   var endDate = request.params.endDate;
 
-  // TODO Create SQL Injection Prevetion Module
-  /* TODO change date and time presentation to
+  // TODO:0 Create SQL Injection Prevetion Module
+  /* DONE:10 change date and time presentation to
     API format (date: yyyyddmm; time:hhmmss) */
-  // DOING:0 TEST request API with POSTMAN
+  // DONE:0 TEST request API with POSTMAN
 
 /*
 Date database format

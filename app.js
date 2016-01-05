@@ -15,7 +15,7 @@ var getCalls = require('./routes/getCalls');
 
 var app = express();
 
-// TODO check how to make https connections with node
+// TODO:10 ENHANCEMENT check how to make https connections with node
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,7 +40,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // API Routes
 // POST
-//app.post('/createPerson', createPerson);
 app.post('/createCall', upload.single('encoded_string'), createCall);
 
 // GET
