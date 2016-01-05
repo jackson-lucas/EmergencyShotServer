@@ -1,14 +1,9 @@
-//var sequelize = require('../database/database_connection.js');
+var sequelize = require('../database/database_connection.js');
 
 module.exports = function createCall (request, response, next) {
 
   console.log("CREATE CALL");
-  console.log("-------------------------");
-
-
-  console.log(typeof request.body.json);
-console.log("-------------------------");
-  //var midia = request.body.encoded_string;
+  var midia = request.body.encoded_string;
   var jsonData = JSON.parse(request.body.json);
 
   /*
@@ -20,22 +15,21 @@ console.log("-------------------------");
   var latitude = jsonData.lat;
   var longitude = jsonData.lon;
 
-  var query = `INSERT INTO chamada(DATA, HORARIO, LAT, LON, ID_SINISTRO) VALUES
-    ('${data}', '${horario}', ${latitude}, ${longitude}, ${sinistroId});`;
-  response.send(query);
-  // console.log("-------------------------");
-  // console.log(query);
-  // console.log("-------------------------");
-  //
-  // sequelize.query(query, { type: sequelize.QueryTypes.INSERT})
-  //   .then(function(result) {
-  //     console.log(result);
-  //     response.send(result);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //     response.send(result);
-  //   });
-  //
+  var query = `INSERT INTO chamada(DATA, HORARIO, LAT, LON, ID_SINISTRO, MIDIA) VALUES
+    ('${data}', '${horario}', ${latitude}, ${longitude}, ${sinistroId}, '${midia}');`;
+
+  console.log("-------------------------");
+  console.log(query);
+  console.log("-------------------------");
+
+  sequelize.query(query, { type: sequelize.QueryTypes.INSERT})
+    .then(function(result) {
+      response.send("OK");
+    })
+    .catch(function (error) {
+      console.log(error);
+      response.send("ERROR");
+    });
+
 
 };

@@ -4,8 +4,7 @@ var favicon = require('serve-favicon'); // NOT USING
 var logger = require('morgan');
 var cookieParser = require('cookie-parser'); // NOT USING
 var bodyParser = require('body-parser');
-var sqlinjection = require('sql-injection');
-var multer  = require('multer');
+var multer  = require('multer'); // form multi-form data
 
 var upload = multer({ dest: 'uploads/' });
 
@@ -15,9 +14,6 @@ var createCall = require('./routes/createCall');
 var getCalls = require('./routes/getCalls');
 
 var app = express();
-
-// Protection Modules
-//app.use(sqlinjection);
 
 // TODO check how to make https connections with node
 
@@ -76,10 +72,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(error, request, response, next) {
   response.status(error.status || 500);
-  response.render('error', {
-    message: error.message,
-    error: {}
-  });
+  response.render('error');
 });
 
 

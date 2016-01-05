@@ -35,9 +35,6 @@ FROM chamada WHERE data>='${startDate}'
     AND data<='${endDate}' AND horario <= '${endTime}'
     AND horario >= '${startTime}';`;
 
-  console.log("-------------------------");
-  console.log(query);
-  console.log("-------------------------");
   sequelize.query(query, { type: sequelize.QueryTypes.SELECT})
     .then(function(result) {
       console.log(result);
@@ -46,6 +43,6 @@ FROM chamada WHERE data>='${startDate}'
     .catch(function (error) {
       console.log('ERROR --------------------------');
       console.log(error);
-      response.send(error)
+      response.send("ERROR")
     });
 };

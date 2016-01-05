@@ -1,16 +1,11 @@
-Reunião:
-- getSinistros
-    - Desnecessario
-    - Melhor Android App já ter tabela dentro OK
-        - Atualizações(Se ouverem/raramente) na tabela seria feito atualizando o app.
-- Chamada e Tipo de Sinistro
-    - Apenas 1 Sinistro por chamada
-        - Dessa forma, se um sinistro é composto de dois tipos. Então é um novo sinistro.
-            - Intenção é diminuir o número de tabelas no BD e por consequente facilitar pesquisas no BD.
-        - Tratamento Android. Pode ser com multiplas perguntas para obter o sinistro correto. (MVP?)
-        - Tipo de sinistro pode ser mudado para Sinistro. Assim a tabela Sinistro pode ter característica
-            que a diferencia entre outros Sinistros.
-    - Uma linguagem para o usuário comum e outra para o atendente? (MVP?)
+Sinistro Implementar no Servidor Openshift
+1 -  Incêndio
+2 -  Acidente de trânsito
+3 -  Corte/poda de árvore
+4 -  Deslizamento de terra
+5 -  Enchente
+6 -  Desabamento
+7 -  Vazamento de gás
 
 Taxonomia Atendentes
 Incendio
@@ -112,7 +107,7 @@ DATA DATE,
 HORARIO TIME,
 LAT FLOAT(30),
 LON FLOAT(30),
-MIDIA BYTEA,
+MIDIA TEXT,
 ID_SINISTRO INT,
 PRIMARY KEY (ID),
 FOREIGN KEY (ID_SINISTRO) REFERENCES SINISTRO(ID)
