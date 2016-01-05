@@ -9,9 +9,9 @@ var multer  = require('multer'); // form multi-form data
 var upload = multer({ dest: 'uploads/' });
 
 // API ROUTES
-var createPerson = require('./routes/createPerson');
 var createCall = require('./routes/createCall');
 var getCalls = require('./routes/getCalls');
+var getCallsSince = require('./routes/getCallsSince');
 
 var app = express();
 
@@ -44,6 +44,7 @@ app.post('/createCall', upload.single('encoded_string'), createCall);
 
 // GET
 app.get('/getCalls/:startDate/:startTime/:endDate/:endTime', getCalls);
+app.get('/getCallsSince/:startDate/:startTime', getCallsSince);
 
 
 // catch 404 and forward to error handler
@@ -71,7 +72,10 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(error, request, response, next) {
   response.status(error.status || 500);
-  response.render('error');
+  response.render('error', {
+    message: error.message,
+    error: {}
+  });
 });
 
 
