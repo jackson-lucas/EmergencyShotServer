@@ -6,6 +6,7 @@ module.exports = function createCall (request, response, next) {
 
   var startTime = request.params.startTime;
   var startDate = request.params.startDate;
+
   // TODO calls should be returned in order by as the last on the list is the newest
   // TODO:0 Create SQL Injection Prevetion Module
   /* DONE:10 change date and time presentation to
@@ -25,10 +26,10 @@ date
 2015-12-31
 (1 row)
 */
-  /* select id, to_char(chamada.data, 'MM-DD-YYYY') as data, horario, lat, lon, midia, id_sinistro
-from chamada where data>='11-27-2015' and horario > '14:00:00';*/
+  /* select id, to_char(chamada.data, 'MM-DD-YYYY') as data, horario, lat, lon, id_sinistro, midia
+from chamada where data>='11-27-2015' and horario > '14:00:00' ORDER BY chamada.data, horario;*/
   var query = `SELECT id, to_char(chamada.data, 'MM-DD-YYYY') as data, horario, lat, lon, midia, id_sinistro
-FROM chamada WHERE data>='${startDate}' AND horario >= '${startTime}';`;
+FROM chamada WHERE data>='${startDate}' AND horario >= '${startTime}' ORDER BY chamada.data, horario;`;
 
   sequelize.query(query, { type: sequelize.QueryTypes.SELECT})
     .then(function(result) {

@@ -128,7 +128,7 @@ INSERT INTO pessoa(NOME, GOOGLE_ID, TELEFONE) VALUES ('Jackson Lima', '123456789
 
 INSERT INTO sinistro(ID, SINISTRO) VALUES (1, 'Incêndio em veículo');
 
-INSERT INTO chamada(DATA, HORARIO, LAT, LON, ID_SINISTRO) VALUES ('01-05-2016', '11:00:00', '-3.119028', '-60.021531', 1);
+INSERT INTO chamada(DATA, HORARIO, LAT, LON, ID_SINISTRO) VALUES ('01-05-2016', '15:00:00', '-3.119028', '-60.021531', 1);
 
 select * from pessoa;
 select * from sinistro;

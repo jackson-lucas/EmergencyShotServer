@@ -33,7 +33,7 @@ horario <= '15:30:00' and horario > '14:00:00';*/
   var query = `SELECT id, to_char(chamada.data, 'MM-DD-YYYY') as data, horario, lat, lon, midia, id_sinistro
 FROM chamada WHERE data>='${startDate}'
     AND data<='${endDate}' AND horario <= '${endTime}'
-    AND horario >= '${startTime}';`;
+    AND horario >= '${startTime}' ORDER BY chamada.data, horario;`;
 
   sequelize.query(query, { type: sequelize.QueryTypes.SELECT})
     .then(function(result) {
