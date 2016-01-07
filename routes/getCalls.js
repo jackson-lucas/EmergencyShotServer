@@ -1,6 +1,6 @@
 var sequelize = require('../database/database_connection.js');
 
-module.exports = function createCall (request, response, next) {
+module.exports = function getCalls (request, response, next) {
 
   console.log("CREATE CALL");
 
@@ -10,9 +10,9 @@ module.exports = function createCall (request, response, next) {
   var endDate = request.params.endDate;
 
   // TODO:0 Create SQL Injection Prevetion Module
-  /* DONE:10 change date and time presentation to
+  /* DONE:30 change date and time presentation to
     API format (date: yyyyddmm; time:hhmmss) */
-  // DONE:0 TEST request API with POSTMAN
+  // DONE:10 TEST request API with POSTMAN
 
 /*
 Date database format

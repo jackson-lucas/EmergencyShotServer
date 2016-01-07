@@ -1,17 +1,17 @@
 var sequelize = require('../database/database_connection.js');
 
-module.exports = function createCall (request, response, next) {
+module.exports = function getCallsSince (request, response, next) {
 
   console.log("GET CALLS");
 
   var startTime = request.params.startTime;
   var startDate = request.params.startDate;
 
-  // TODO calls should be returned in order by as the last on the list is the newest
-  // TODO:0 Create SQL Injection Prevetion Module
-  /* DONE:10 change date and time presentation to
+  // DONE:0 calls should be returned in order by as the last on the list is the newest
+  // TODO:10 Create SQL Injection Prevention Module
+  /* DONE:40 change date and time presentation to
     API format (date: yyyyddmm; time:hhmmss) */
-  // DONE:0 TEST request API with POSTMAN
+  // DONE:20 TEST request API with POSTMAN
 
 /*
 Date database format
