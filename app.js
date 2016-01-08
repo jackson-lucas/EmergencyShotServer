@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.post('/createCall', upload.single('encoded_string'), createCall);
 
 // GET
-// DOING:0 create a route to images from DB, images must be retrieved by id
+// DONE:0 create a route to images from DB, images must be retrieved by id
 // TODO:20 change getCalls and getCallsSince to not return midia
 app.get('/getImage/:id', getImage);
 app.get('/getCalls/:startDate/:startTime/:endDate/:endTime', getCalls);

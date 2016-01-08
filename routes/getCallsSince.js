@@ -7,11 +7,11 @@ module.exports = function getCallsSince (request, response, next) {
   var startTime = request.params.startTime;
   var startDate = request.params.startDate;
 
-  // DONE:0 calls should be returned in order by as the last on the list is the newest
+  // DONE:10 calls should be returned in order by as the last on the list is the newest
   // TODO:30 Create SQL Injection Prevention Module
-  /* DONE:40 change date and time presentation to
+  /* DONE:50 change date and time presentation to
     API format (date: yyyyddmm; time:hhmmss) */
-  // DONE:20 TEST request API with POSTMAN
+  // DONE:30 TEST request API with POSTMAN
 
 /*
 Date database format
@@ -28,7 +28,7 @@ date
 */
   /* select id, to_char(chamada.data, 'MM-DD-YYYY') as data, horario, lat, lon, id_sinistro, midia
 from chamada where data>='11-27-2015' and horario > '14:00:00' ORDER BY chamada.data, horario;*/
-  var query = `SELECT id, to_char(chamada.data, 'MM-DD-YYYY') as data, horario, lat, lon, midia, id_sinistro
+  var query = `SELECT id, to_char(chamada.data, 'MM-DD-YYYY') as data, horario, lat, lon, id_sinistro
 FROM chamada WHERE data>='${startDate}' AND horario >= '${startTime}' ORDER BY chamada.data, horario;`;
 
   sequelize.query(query, { type: sequelize.QueryTypes.SELECT})

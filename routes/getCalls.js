@@ -10,9 +10,9 @@ module.exports = function getCalls (request, response, next) {
   var endDate = request.params.endDate;
 
   // TODO:0 Create SQL Injection Prevetion Module
-  /* DONE:30 change date and time presentation to
+  /* DONE:40 change date and time presentation to
     API format (date: yyyyddmm; time:hhmmss) */
-  // DONE:10 TEST request API with POSTMAN
+  // DONE:20 TEST request API with POSTMAN
 
 /*
 Date database format
@@ -30,7 +30,7 @@ date
   /* select id, google_id, data, horario, lat, lon, midia, id_sinistro
 from chamada where data>='11-27-2015' and data<='11-27-2015' and
 horario <= '15:30:00' and horario > '14:00:00';*/
-  var query = `SELECT id, to_char(chamada.data, 'MM-DD-YYYY') as data, horario, lat, lon, midia, id_sinistro
+  var query = `SELECT id, to_char(chamada.data, 'MM-DD-YYYY') as data, horario, lat, lon, id_sinistro
 FROM chamada WHERE data>='${startDate}'
     AND data<='${endDate}' AND horario <= '${endTime}'
     AND horario >= '${startTime}' ORDER BY chamada.data, horario;`;
