@@ -12,10 +12,11 @@ var upload = multer({ dest: 'uploads/' });
 var createCall = require('./routes/createCall');
 var getCalls = require('./routes/getCalls');
 var getCallsSince = require('./routes/getCallsSince');
+var getImage = require('./routes/getImage');
 
 var app = express();
 
-// TODO:20 ENHANCEMENT check how to make https connections with node
+// TODO:40 ENHANCEMENT check how to make https connections with node
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,6 +44,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.post('/createCall', upload.single('encoded_string'), createCall);
 
 // GET
+// DOING:0 create a route to images from DB, images must be retrieved by id
+// TODO:20 change getCalls and getCallsSince to not return midia
+app.get('/getImage/:id', getImage);
 app.get('/getCalls/:startDate/:startTime/:endDate/:endTime', getCalls);
 app.get('/getCallsSince/:startDate/:startTime', getCallsSince);
 
