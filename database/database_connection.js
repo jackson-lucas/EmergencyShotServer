@@ -1,6 +1,6 @@
-var Sequelize = require('sequelize');
+var Sequelize = require('sequelize')
 //
-//var sequelize = new Sequelize('jacksonlima', 'jacksonlima', 'DeTo0709', {
+// var sequelize = new Sequelize('jacksonlima', 'jacksonlima', 'DeTo0709', {
 //  host: 'localhost',
 //  dialect: 'postgres',
 //
@@ -9,10 +9,9 @@ var Sequelize = require('sequelize');
 //    min: 0,
 //    idle: 10000
 //  },
-//});
+// })
 
 // Or you can simply use a connection uri
-var sequelize = new Sequelize('postgres://jacksonlima:DeTo0709@localhost:5432/test_node');
+var sequelize = new Sequelize('postgres://jacksonlima:DeTo0709@localhost:5432/test_node')
 
-module.exports = sequelize;
-
+module.exports = sequelize
