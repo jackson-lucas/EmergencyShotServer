@@ -16,6 +16,7 @@ var getImage = require('./routes/getImage');
 
 var app = express();
 
+// TODO populate openshift database with sinisters
 // TODO:40 ENHANCEMENT check how to make https connections with node
 
 // view engine setup
