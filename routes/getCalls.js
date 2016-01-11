@@ -29,7 +29,7 @@ module.exports = function getCalls (request, response, next) {
   /* select id, google_id, data, horario, lat, lon, midia, id_sinistro
 from chamada where data>='11-27-2015' and data<='11-27-2015' and
 horario <= '15:30:00' and horario > '14:00:00';*/
-  var query = `SELECT id, to_char(chamada.data, 'MM-DD-YYYY') as data, horario, lat, lon, id_sinistro
+  var query = `SELECT id, to_char(chamada.data, 'MM-DD-YYYY') as data, horario, lat, lon, id_sinistro, endereco
 FROM chamada WHERE data>='${startDate}'
     AND data<='${endDate}' AND horario <= '${endTime}'
     AND horario >= '${startTime}' ORDER BY chamada.data, horario;`

@@ -43,6 +43,10 @@ module.exports = function (request, response, next) {
           console.log('*********************************')
         } else {
           console.log(data.status)
+          jsonData.formatted_address = 'status: ' + data.status +
+            `. Não foi possível encontrar o endereço.
+             Contate um administrador do sistema para mais informações.`
+          request.body.json = jsonData
         }
       } else {
         console.log(error)
