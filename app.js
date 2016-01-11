@@ -14,6 +14,8 @@ var getCalls = require('./routes/getCalls')
 var getCallsSince = require('./routes/getCallsSince')
 var getImage = require('./routes/getImage')
 
+var getAddressRequest = require('./requests/getAddressRequest')
+
 var app = express()
 
 // TODO populate openshift database with sinisters
@@ -33,6 +35,7 @@ app.use(function (req, res, next) {
   next()
 })
 
+// TODO ENHANCEMENT create flag isTrote on database and filter calls based on this.
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -41,7 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // API Routes
 // POST
-app.post('/createCall', upload.single('encoded_string'), createCall)
+app.post('/createCall', upload.single('encoded_string'), getAddressRequest, createCall)
 
 // GET
 // DONE:0 create a route to images from DB, images must be retrieved by id
