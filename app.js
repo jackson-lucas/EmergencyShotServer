@@ -18,8 +18,7 @@ var getAddressRequest = require('./requests/getAddressRequest')
 
 var app = express()
 
-// TODO populate openshift database with sinisters
-// TODO:40 ENHANCEMENT check how to make https connections with node
+// TODO:30 ENHANCEMENT check how to make https connections with node
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
@@ -35,7 +34,7 @@ app.use(function (req, res, next) {
   next()
 })
 
-// TODO ENHANCEMENT create flag isTrote on database and filter calls based on this.
+// TODO:10 ENHANCEMENT create flag isTrote on database and filter calls based on this.
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -47,8 +46,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.post('/createCall', upload.single('encoded_string'), getAddressRequest, createCall)
 
 // GET
-// DONE:0 create a route to images from DB, images must be retrieved by id
-// TODO:20 change getCalls and getCallsSince to not return midia
+// DONE:10 create a route to images from DB, images must be retrieved by id
+// DONE:0 change getCalls and getCallsSince to not return midia
 app.get('/getImage/:id', getImage)
 app.get('/getCalls/:startDate/:startTime/:endDate/:endTime', getCalls)
 app.get('/getCallsSince/:startDate/:startTime', getCallsSince)

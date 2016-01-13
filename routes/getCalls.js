@@ -9,9 +9,9 @@ module.exports = function getCalls (request, response, next) {
   var endDate = request.params.endDate
 
   // TODO:0 Create SQL Injection Prevetion Module
-  /* DONE:40 change date and time presentation to
+  /* DONE:50 change date and time presentation to
     API format (date: yyyyddmm; time:hhmmss) */
-  // DONE:20 TEST request API with POSTMAN
+  // DONE:30 TEST request API with POSTMAN
 
   /*
   Date database format
