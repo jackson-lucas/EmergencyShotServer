@@ -26,7 +26,7 @@ module.exports = function getCallsSince (request, response, next) {
   */
   /* select id, to_char(chamada.data, 'MM-DD-YYYY') as data, horario, lat, lon, id_sinistro, midia
 from chamada where data>='11-27-2015' and horario > '14:00:00' ORDER BY chamada.data, horario;*/
-  var query = `SELECT id, to_char(chamada.data, 'MM-DD-YYYY') as data, horario, lat, lon, id_sinistro, endereco
+  var query = `SELECT id, to_char(chamada.data, 'MM-DD-YYYY') as data, horario, lat, lon, id_sinistro, endereco, midia
 FROM chamada WHERE data>='${startDate}' AND horario >= '${startTime}' ORDER BY chamada.data, horario;`
 
   sequelize.query(query, {type: sequelize.QueryTypes.SELECT})

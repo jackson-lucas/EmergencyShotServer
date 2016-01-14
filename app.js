@@ -48,7 +48,7 @@ app.post('/createCall', upload.single('encoded_string'), getAddressRequest, crea
 // GET
 // DONE:10 create a route to images from DB, images must be retrieved by id
 // DONE:0 change getCalls and getCallsSince to not return midia
-app.get('/getImage/:id', getImage)
+// app.get('/getImage/:id', getImage)
 app.get('/getCalls/:startDate/:startTime/:endDate/:endTime', getCalls)
 app.get('/getCallsSince/:startDate/:startTime', getCallsSince)
 
