@@ -1,15 +1,5 @@
 var requestLib = require('request')
 
-// function getAddressRequest (error, response, body, callback) {
-//   console.log('getting address')
-//   if (!error && response.statusCode === 200) {
-//     console.log(body) // Show the HTML for the Google homepage.
-//   } else {
-//     console.log(error)
-//   }
-//   this.next()
-// }
-
 /*
 Send an response right away is just possible because HTTP is based on TCP.
 Meaning packages integrity is guaranteed.

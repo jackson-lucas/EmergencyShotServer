@@ -6,10 +6,7 @@ module.exports = function getCallsSince (request, response, next) {
   var startTime = request.params.startTime
   var startDate = request.params.startDate
 
-  // DONE:20 calls should be returned in order by as the last on the list is the newest
-  /* DONE:60 change date and time presentation to
-    API format (date: yyyyddmm; time:hhmmss) */
-  // DONE:40 TEST request API with POSTMAN
+  // API format (date: yyyyddmm; time:hhmmss)
 
   /*
   Date database format
