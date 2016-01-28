@@ -26,6 +26,7 @@ module.exports = function createCall (request, response, next) {
       console.log('ok')
     })
     .catch(function (error) {
-      console.log(error)
+      var errorMsg = new Error('ERROR')
+      console.log(errorMsg)
     })
 }
